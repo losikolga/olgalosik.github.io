@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ---------- общие стили ---------- */
+        body {
+            margin: 0;
+            background: #fafafa;
+            font-family: Arial, sans-serif;
+        }
+
+        /* ---------- галерея (4:3, без рамок) ---------- */
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 12px;
+            padding: 20px 0;
+        }
+        .gallery-item {
+            cursor: pointer;
+            overflow: hidden;
+        }
+        .gallery-item img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+            transition: transform 0.2s;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.03);
+        }
+
+        /* ---------- лайтбокс ---------- */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0.85);
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .lightbox.active {
+            display: flex;
+        }
+        .lightbox-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 75vh;
+            object-fit: contain;
+            border-radius: 4px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        .lightbox-caption {
+            margin-top: 12px;
+            color: #fff;
+            font-size: 16px;
+            background: rgba(0,0,0,0.5);
+            padding: 6px 18px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 80%;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: #fff;
+            cursor: pointer;
+            z-index: 10;
+            background: none;
+            border: none;
+            transition: 0.2s;
+        }
+        .lightbox-close:hover {
+            transform: scale(1.2);
+        }
+        .lightbox-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 50px;
+            color: #fff;
+            cursor: pointer;
+            background: rgba(0,0,0,0.3);
+            border: none;
+            padding: 10px 16px;
+            border-radius: 50%;
+            transition: 0.2s;
+            z-index: 10;
+            user-select: none;
+        }
+        .lightbox-arrow:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        .lightbox-prev {
+            left: 20px;
+        }
+        .lightbox-next {
+            right: 20px;
+        }
+        @media (max-width: 600px) {
+            .lightbox-arrow {
+                font-size: 30px;
+                padding: 6px 10px;
+            }
+            .lightbox-prev { left: 10px; }
+            .lightbox-next { right: 10px; }
+        }
+
+        /* ---------- футер ---------- */
+        .footer {
+            text-align: center;
+            padding: 30px 0 10px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <div class="header">
+        <div class="header-nav">
+            <a href="index.html">home</a>
+            <a href="works.html">works</a>
+            <a href="gallery.html" class="active">gallery</a>
+            <a href="contact.html">contact me</a>
+        </div>
+    </div>
+
+    <!-- ===== КОНТЕЙНЕР ГАЛЕРЕИ ===== -->
+    <div class="container">
+        <h1 class="page-title">GALLERY</h1>
+        <div class="gallery-container" id="galleryContainer"></div>
+        <div class="footer">
+            <p>&copy; 2026 Designed & built by Olga Losik. All rights reserved.</p>
+        </div>
+    </div>
+
+    <!-- ===== ЛАЙТБОКС ===== -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose">&times;</button>
+        <button class="lightbox-arrow lightbox-prev" id="lightboxPrev">&#10094;</button>
+        <div class="lightbox-content">
+            <img id="lightboxImage" src="" alt="">
+            <div class="lightbox-caption" id="lightboxCaption"></div>
+        </div>
+        <button class="lightbox-arrow lightbox-next" id="lightboxNext">&#10095;</button>
+    </div>
+
+    <script>
+        (function() {
+            // -------------------------------------------------------------
+            // 1. СПИСОК ФОТО С НАЗВАНИЯМИ (РЕДАКТИРУЙТЕ ЗДЕСЬ)
+            // -------------------------------------------------------------
+            const imageData = [
+                // --- THE BOX MAN ---
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/box%20main.jpeg", title: "The Box Man" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/box2.jpeg", title: "The Box Man 2" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/box3.jpg", title: "The Box Man 3" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/box4.jpg", title: "The Box Man 4" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/box5.jpeg", title: "The Box Man 5" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/box6.jpg", title: "The Box Man 6" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/box7.jpeg", title: "The Box Man 7" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/box.gif", title: "The Box Man 8" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/box8.jpg", title: "The Box Man 9" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/box9.jpg", title: "The Box Man 10" },
+
+                // --- PARIS, EARTH ---
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/paris5.png", title: "Eiffel tower" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/paris1.jpg", title: "Paris, Earth" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/paris2.jpg", title: "Paris, Earth" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/paris3.jpg", title: "Paris, Earth" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/paris4.jpg", title: "Paris, Earth" },
+
+                // --- DOG ---
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/dog%20background.jpg", title: "DOG" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/dog1.jpg", title: "DOG 1" },
+               
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/dog4.jpg", title: "DOG 2" },
+                
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/dog6.jpg", title: "DOG 3" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/dog8.jpg", title: "DOG 4" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/dog9.jpg", title: "DOG 5" },
+                
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/dog11.jpg", title: "DOG 6" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/dog12.jpg", title: "DOG 7" },
+                
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/dog14.jpg", title: "DOG 8" },
+               
+
+                // --- DO YOU REMEMBER ME? ---
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/do%20you%20backgound.jpg", title: "Do you remember me?" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/do%20you1.jpg", title: "Do you remember me? 1" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/do%20you2.jpg", title: "Do you remember me? 2" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/do%20you3.jpg", title: "Do you remember me? 3" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/do%20you4.jpg", title: "Do you remember me? 4" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/do%20you5.jpg", title: "Do you remember me? 5" },
+     
+
+                // --- NOT EVERYONE WILL GO INTO SPACE ---
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/NEWGISE5.jpg", title: "NOT EVERYONE WILL GO INTO SPACE 1" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/NEWGISE4.jpg", title: "NOT EVERYONE WILL GO INTO SPACE 2" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/NEWGISE3.jpg", title: "NOT EVERYONE WILL GO INTO SPACE 3" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/NEWGISE2.jpg", title: "NOT EVERYONE WILL GO INTO SPACE 4" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/NEWGISE1.jpg", title: "NOT EVERYONE WILL GO INTO SPACE 5" },
+
+
+ // --- DEFECTED STILLS ---
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/def1.gif", title: "animation on Super8 mm" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/def2.gif", title: "animation 2 on Super8 mm" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/def4.gif", title: "animation 3 on Super8 mm" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/def5.gif", title: "animation 4 on Super8 mm" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/def6.gif", title: "animation 5 on Super8 mm" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/def7.gif", title: "animation 6 on Super8 mm" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/def8.gif", title: "animation 7 on Super8 mm" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/def9.gif", title: "animation 8 on Super8 mm" },
+
+
+// --- SUNSET ---
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/sunsetgif1.gif", title: "sunset mixed media 1" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/sunsetgif2.gif", title: "sunset mixed media 2" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/sunsetgif3.gif", title: "sunset mixed media 3" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/sunset2.jpg", title: "sunset mixed media 4" },
+                { src: "https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/sunset5.jpg", title: "sunset mixed media 5" }
+
+            ];
+
+            // -------------------------------------------------------------
+            // 2. ПЕРЕМЕШИВАНИЕ
+            // -------------------------------------------------------------
+            function shuffle(arr) {
+                for (let i = arr.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [arr[i], arr[j]] = [arr[j], arr[i]];
+                }
+                return arr;
+            }
+            const images = shuffle(imageData);
+
+            // -------------------------------------------------------------
+            // 3. ОТРИСОВКА ГАЛЕРЕИ
+            // -------------------------------------------------------------
+            const container = document.getElementById('galleryContainer');
+            images.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'gallery-item';
+                const img = document.createElement('img');
+                img.src = item.src;
+                img.loading = 'lazy';
+                img.alt = item.title;
+                div.appendChild(img);
+                container.appendChild(div);
+            });
+
+            // -------------------------------------------------------------
+            // 4. ЛАЙТБОКС – ПОЛНОСТЬЮ РАБОЧИЙ
+            // -------------------------------------------------------------
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImage');
+            const caption = document.getElementById('lightboxCaption');
+            const closeBtn = document.getElementById('lightboxClose');
+            const prevBtn = document.getElementById('lightboxPrev');
+            const nextBtn = document.getElementById('lightboxNext');
+
+            let currentIndex = 0;
+
+            function openLightbox(index) {
+                if (index < 0) index = images.length - 1;
+                if (index >= images.length) index = 0;
+                currentIndex = index;
+                const item = images[currentIndex];
+                lightboxImg.src = item.src;
+                caption.textContent = item.title;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            function prevImage() {
+                openLightbox(currentIndex - 1);
+            }
+
+            function nextImage() {
+                openLightbox(currentIndex + 1);
+            }
+
+            // Клик по миниатюре
+            document.querySelectorAll('.gallery-item img').forEach((img, idx) => {
+                img.addEventListener('click', () => {
+                    openLightbox(idx);
+                });
+            });
+
+            // Закрытие по крестику
+            closeBtn.addEventListener('click', closeLightbox);
+
+            // Закрытие по клику на фон (но не на само изображение)
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) closeLightbox();
+            });
+
+            // Стрелки
+            prevBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                prevImage();
+            });
+            nextBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                nextImage();
+            });
+
+            // Клавиши
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox.classList.contains('active')) return;
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') prevImage();
+                if (e.key === 'ArrowRight') nextImage();
+            });
+
+            // Свайп на мобильных (базово)
+            let touchStartX = 0;
+            lightbox.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+            lightbox.addEventListener('touchend', (e) => {
+                const diff = touchStartX - e.changedTouches[0].screenX;
+                if (Math.abs(diff) > 50) {
+                    if (diff > 0) nextImage();
+                    else prevImage();
+                }
+            }, { passive: true });
+
+        })();
+    </script>
+
+</body>
+</html>

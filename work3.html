@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Do you remember me?</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Добавляем стили для фонового изображения -->
+    <style>
+
+        body {
+    background-image: url('https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/do%20you%20backgound.jpg');
+background-position: left top;
+    background-repeat: repeat;
+background-size: 300px 200px;  
+
+  
+}
+        /* Чтобы контент был читаемым, добавляем полупрозрачный фон для контейнера */
+        .container {
+            background-color: rgba(255, 255, 255, 0.90);
+            padding: 20px;
+            border-radius: 0px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        /* Блок с маленьким фото – выравнивание по левому краю (как у вас) */
+        .small-photo-wrapper {
+            text-align: left;
+            margin-top: 30px;
+        }
+        .small-photo-wrapper img {
+            width: 100%;           /* чтобы адаптироваться под контейнер */
+            max-width: 700px;      /* ограничиваем ширину – примерно в 2 раза меньше видео */
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            display: block;        /* убираем лишний отступ снизу */
+        }
+        .small-photo-caption {
+            border: 1px solid #ccc;
+            padding: 8px 12px;
+            margin-top: 6px;
+            display: inline-block; /* чтобы рамка была только под текстом */
+            font-size: 14px;
+            color: #555;
+            border-radius: 4px;
+            background: #f9f9f9;
+        }
+        /* Для видео */
+        .map-video {
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-nav">
+            <a href="index.html">home</a>
+            <a href="works.html">works</a>
+            <a href="gallery.html">gallery</a>
+            <a href="contact.html">contact me</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1 class="page-title">Do you remember me?, 2026</h1>
+        <h2 style="font-size: 20px; margin-bottom: 20px;">Analogue, Animation, Experimental, 4 min</h2>
+        
+        <div class="work-detail">
+            <!-- КРАТКОЕ ОПИСАНИЕ -->
+            <p>
+                Analogue film work combining Super 8 mm with hand-drawn colouring on celluloid, sound is partially recorded on magnetic tape. Decaying of the frames and images is reached by manually using different types of chemicals.This film embodies the mechanics of memory.
+            </p>
+
+            <!-- ФОТОГАЛЕРЕЯ -->
+            <div class="work-gallery">
+                <img src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/do%20you1.jpg" alt="" class="gallery-photo">
+                <img src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/do%20you2.jpg" alt="" class="gallery-photo">
+                <img src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/do%20you3.jpg" alt="" class="gallery-photo">
+                <img src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/do%20you4.jpg" alt="" class="gallery-photo">
+                <img src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/do%20you5.jpg" alt="" class="gallery-photo">
+            </div>
+
+            <!-- ПОЛНОЕ ОПИСАНИЕ -->
+            <p style="margin-top: 15px;">
+                <strong>Description:</strong><br>
+                A familiar face from the past on which you futilely try to hold your gaze. An image you struggle to recall upon waking. Like memory itself, celluloid and magnetic tape decay over time, dissolving images, distorting them, or filling them with blind spots. 
+            </p>
+
+            <!-- АВТОР -->
+            <p style="margin-top: 15px;">
+                <strong>Author:</strong><br>
+                Olga Losik
+            </p>
+
+            <!-- АКТЁРЫ -->
+            <p style="margin-top: 15px;">
+                <strong>Cast:</strong><br>
+                Asel Bagautdinova, Semyon Bidzhiev
+            </p>
+
+            <!-- ФЕСТИВАЛИ (СПИСОК БЕЗ МАРКЕРОВ) -->
+            <p style="margin-top: 15px;">
+                <strong>Festivals and Screenings:</strong>
+            </p>
+            <ul style="list-style: none; padding-left: 20px; margin: 0;">
+                <li style="margin-top: 8px;">Jun 2026 -- Voyage in Time Film Festival, Tokyo, Japan</li>
+                <li style="margin-top: 8px;">Sep 2026 -- 1st Saint Petersburg International Experimental Film Festival / SPIEXFF, Saint-Petersburg, Russia</li>
+            </ul>
+
+            <!-- ======= НОВЫЙ БЛОК С МАЛЕНЬКИМ ФОТО И ПОДПИСЬЮ ======= -->
+            <div class="small-photo-wrapper">
+                <img 
+                    src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/do%20you6.JPEG" 
+                    alt="Кадр из фильма Do you remember me?"
+                >
+               
+            </div>
+
+            <!-- ВИДЕО -->
+            <section class="map-video">
+                <div class="map-video-label">
+                    TEASER
+                </div>
+                <div class="work-video" id="videoPreview">
+                    <div class="video-thumbnail">
+                        <img
+                            src="https://img.youtube.com/vi/4vh8fdDScSo/maxresdefault.jpg"
+                            alt=""
+                        >
+                        <div class="video-play-button">▶</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ССЫЛКА НАЗАД -->
+            <p style="margin-top: 15px;">
+                <a href="works.html" style="color: #0000ff; text-decoration: underline;">← Back to Works</a>
+            </p>
+
+        </div> <!-- конец .work-detail -->
+
+        <div class="footer">
+            <p>&copy; 2026 Designed & built by Olga Losik. All rights reserved.</p>
+        </div>
+    </div> <!-- конец .container -->
+
+    <!-- ФОТО-ЛАЙТБОКС -->
+    <div id="lightbox" class="lightbox">
+        <button id="lightboxPrev" class="lightbox-arrow lightbox-prev">‹</button>
+        <img id="lightboxImage" src="" alt="">
+        <button id="lightboxNext" class="lightbox-arrow lightbox-next">›</button>
+    </div>
+
+    <!-- ВИДЕО-ЛАЙТБОКС -->
+    <div id="videoLightbox" class="video-lightbox">
+        <div class="video-container">
+            <iframe
+                id="lightboxVideo"
+                src=""
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+
+    <script>
+        /* ========================================
+           GALLERY
+           ======================================== */
+        const galleryPhotos =
+            Array.from(document.querySelectorAll('.gallery-photo'));
+
+        const lightbox =
+            document.getElementById('lightbox');
+
+        const lightboxImage =
+            document.getElementById('lightboxImage');
+
+        const prevButton =
+            document.getElementById('lightboxPrev');
+
+        const nextButton =
+            document.getElementById('lightboxNext');
+
+        let currentPhoto = 0;
+
+        /* ========================================
+           OPEN PHOTO
+           ======================================== */
+        function openPhoto(index) {
+            currentPhoto = index;
+            lightboxImage.style.transition = 'none';
+            lightboxImage.style.transform = 'translateX(0)';
+            lightboxImage.src = galleryPhotos[currentPhoto].src;
+            lightbox.classList.add('active');
+        }
+
+        /* ========================================
+           CHANGE PHOTO
+           ======================================== */
+        function changePhoto(direction) {
+            const newImage = galleryPhotos[currentPhoto].src;
+
+            if (direction === 'next') {
+                lightboxImage.style.transform = 'translateX(-100vw)';
+            } else {
+                lightboxImage.style.transform = 'translateX(100vw)';
+            }
+
+            setTimeout(() => {
+                lightboxImage.style.transition = 'none';
+                lightboxImage.src = newImage;
+
+                if (direction === 'next') {
+                    lightboxImage.style.transform = 'translateX(100vw)';
+                } else {
+                    lightboxImage.style.transform = 'translateX(-100vw)';
+                }
+
+                lightboxImage.offsetHeight;
+                lightboxImage.style.transition = 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)';
+                lightboxImage.style.transform = 'translateX(0)';
+            }, 300);
+        }
+
+        /* ========================================
+           PREVIOUS PHOTO
+           ======================================== */
+        function showPrevious() {
+            currentPhoto--;
+            if (currentPhoto < 0) {
+                currentPhoto = galleryPhotos.length - 1;
+            }
+            changePhoto('previous');
+        }
+
+        /* ========================================
+           NEXT PHOTO
+           ======================================== */
+        function showNext() {
+            currentPhoto++;
+            if (currentPhoto >= galleryPhotos.length) {
+                currentPhoto = 0;
+            }
+            changePhoto('next');
+        }
+
+        /* ========================================
+           CLICK ON PHOTO
+           ======================================== */
+        galleryPhotos.forEach((photo, index) => {
+            photo.addEventListener('click', () => {
+                openPhoto(index);
+            });
+        });
+
+        /* ========================================
+           PHOTO ARROWS
+           ======================================== */
+        prevButton.addEventListener('click', (event) => {
+            event.stopPropagation();
+            showPrevious();
+        });
+
+        nextButton.addEventListener('click', (event) => {
+            event.stopPropagation();
+            showNext();
+        });
+
+        /* ========================================
+           CLOSE PHOTO LIGHTBOX
+           ======================================== */
+        lightbox.addEventListener('click', (event) => {
+            if (event.target === lightbox) {
+                lightbox.classList.remove('active');
+                lightboxImage.src = '';
+            }
+        });
+
+        /* ========================================
+           VIDEO
+           ======================================== */
+        const videoPreview =
+            document.getElementById('videoPreview');
+
+        const videoLightbox =
+            document.getElementById('videoLightbox');
+
+        const lightboxVideo =
+            document.getElementById('lightboxVideo');
+
+        const youtubeVideoID = '4vh8fdDScSo';
+
+        /* ========================================
+           OPEN VIDEO
+           ======================================== */
+        videoPreview.addEventListener('click', () => {
+            lightboxVideo.src =
+                'https://www.youtube.com/embed/4vh8fdDScSo?autoplay=1';
+            videoLightbox.classList.add('active');
+        });
+
+        /* ========================================
+           CLOSE VIDEO
+           ======================================== */
+        videoLightbox.addEventListener('click', (event) => {
+            if (event.target === videoLightbox) {
+                lightboxVideo.src = '';
+                videoLightbox.classList.remove('active');
+            }
+        });
+
+        /* ========================================
+           KEYBOARD
+           ======================================== */
+        document.addEventListener('keydown', (event) => {
+            /* ESC */
+            if (event.key === 'Escape') {
+                if (lightbox.classList.contains('active')) {
+                    lightbox.classList.remove('active');
+                    lightboxImage.src = '';
+                }
+                if (videoLightbox.classList.contains('active')) {
+                    lightboxVideo.src = '';
+                    videoLightbox.classList.remove('active');
+                }
+            }
+
+            /* Стрелка влево */
+            if (event.key === 'ArrowLeft' && lightbox.classList.contains('active')) {
+                showPrevious();
+            }
+
+            /* Стрелка вправо */
+            if (event.key === 'ArrowRight' && lightbox.classList.contains('active')) {
+                showNext();
+            }
+        });
+
+        /* ========================================
+           TOUCH SWIPE
+           ======================================== */
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        lightbox.addEventListener('touchstart', (event) => {
+            touchStartX = event.touches[0].clientX;
+        }, { passive: true });
+
+        lightbox.addEventListener('touchend', (event) => {
+            touchEndX = event.changedTouches[0].clientX;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const swipeDistance = touchEndX - touchStartX;
+
+            if (swipeDistance > 50) {
+                showPrevious();
+            }
+
+            if (swipeDistance < -50) {
+                showNext();
+            }
+        }
+    </script>
+</body>
+</html>

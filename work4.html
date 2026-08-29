@@ -1,0 +1,2289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Box Man</title>
+
+<style>
+
+/* =========================================================
+   BASIC
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    background: #ffffff;
+    color: #000000;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+}
+
+body.boxman-page {
+    background: #000000;
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.boxman-page .header {
+    width: 100%;
+    background: #000000;
+    border-bottom: 2px solid #ffffff;
+    padding: 15px 20px;
+    margin: 0 0 24px;
+}
+
+.header-nav {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.header-nav a {
+    color: #ffffff;
+    font-size: 16px;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.header-nav a:hover {
+    color: #57f736;
+}
+
+
+/* =========================================================
+   PAGE CONTAINER
+========================================================= */
+
+.boxman-page .container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+}
+
+.boxman-page .page-title {
+    margin: 0 0 12px;
+    color: #ffffff;
+    font-size: 32px;
+    line-height: 1.15;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.boxman-subtitle {
+    margin: 0 0 12px;
+    color: #ffffff;
+    font-size: 20px;
+    line-height: 1.3;
+}
+
+
+/* =========================================================
+   OPENING AREA
+========================================================= */
+
+.box-opening {
+    width: 100%;
+    min-height: 52vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* BOX IS NOW 60PX LOWER */
+    padding: 35px 0 45px;
+    transform: translateY(60px);
+
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.box-opening.opening-hidden {
+    opacity: 0;
+    transform: translateY(60px) scale(0.96);
+}
+
+
+/* =========================================================
+   BOX GEOMETRY
+========================================================= */
+
+.small-box {
+    position: relative;
+    width: 520px;
+    height: 350px;
+    flex: 0 0 auto;
+}
+
+.box-drawing {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible;
+}
+
+.box-drawing polygon,
+.box-drawing rect,
+.box-drawing line {
+    fill: #000000;
+    stroke: #ffffff;
+    stroke-width: 1.5;
+    vector-effect: non-scaling-stroke;
+    stroke-linejoin: miter;
+}
+
+.box-drawing .box-front {
+    fill: #000000;
+}
+
+.box-drawing .box-top {
+    fill: #000000;
+}
+
+.box-drawing .box-side {
+    fill: #000000;
+}
+
+.box-drawing .lid-seam {
+    fill: none;
+    stroke-width: 1.5;
+}
+
+
+/* =========================================================
+   CONTENT ON FRONT OF BOX
+========================================================= */
+
+.small-box-front-content {
+    position: absolute;
+    left: 0;
+    top: 60px;
+    width: 440px;
+    height: 280px;
+    padding: 18px 38px;
+    color: #ffffff;
+    font-family: monospace;
+    font-size: 16px;
+    line-height: 1.2;
+    z-index: 5;
+}
+
+.industrial-arrows {
+    font-size: 23px;
+    line-height: 1;
+    letter-spacing: 12px;
+    white-space: nowrap;
+}
+
+.industrial-number {
+    margin-top: 25px;
+    font-size: 18px;
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   EYES
+========================================================= */
+
+.box-eyes {
+    position: absolute;
+    left: 220px;
+    top: 127px;
+    width: 150px;
+    height: 48px;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 28px;
+    z-index: 8;
+}
+
+.eye {
+    position: relative;
+    width: 48px;
+    height: 25px;
+    flex: 0 0 48px;
+    background: #ffffff;
+    border: 1px solid #ffffff;
+    border-radius: 50%;
+    overflow: hidden;
+    animation: blink 6s ease-in-out infinite;
+}
+
+.eye::before,
+.eye::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    width: 55px;
+    height: 25px;
+    border: 1.5px solid #000000;
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+.eye::before {
+    top: -15px;
+    border-bottom: 0;
+    border-radius: 50%;
+}
+
+.eye::after {
+    bottom: -15px;
+    border-top: 0;
+    border-radius: 50%;
+}
+
+.pupil {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #000000;
+    transform: translate(-50%, -50%);
+    animation: lookAtButton 7s ease-in-out infinite;
+}
+
+.pupil::after {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 5px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #ffffff;
+}
+
+
+/* =========================================================
+   BLINK
+========================================================= */
+
+@keyframes blink {
+
+    0%, 42%, 46%, 100% {
+        transform: scaleY(1);
+    }
+
+    44% {
+        transform: scaleY(0.08);
+    }
+}
+
+
+/* =========================================================
+   PUPILS
+========================================================= */
+
+@keyframes lookAtButton {
+
+    0%, 22% {
+        transform: translate(-20%, -50%);
+    }
+
+    30%, 52% {
+        transform: translate(30%, -15%);
+    }
+
+    60%, 100% {
+        transform: translate(-50%, -50%);
+    }
+}
+
+
+/* =========================================================
+   BOTTOM PACKAGING SYMBOLS
+========================================================= */
+
+.box-marks {
+    position: absolute;
+    left: 38px;
+    bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    line-height: 1;
+    z-index: 7;
+}
+
+.box-mark-arrows {
+    font-size: 25px;
+    letter-spacing: 2px;
+}
+
+.box-mark-diamond {
+    font-size: 22px;
+}
+
+.box-mark-umbrella {
+    font-size: 23px;
+}
+
+
+/* =========================================================
+   OPEN BUTTON
+========================================================= */
+
+.open-button {
+    position: absolute;
+    right: 32px;
+    bottom: 30px;
+    min-width: 116px;
+    padding: 10px 16px;
+    border: 1px solid #ffffff;
+    background: #000000;
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 12;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.open-button:hover {
+    background: #ffffff;
+    color: #000000;
+}
+
+
+/* =========================================================
+   MAP / MAIN CONTENT
+========================================================= */
+
+.boxman-map {
+    display: none;
+    width: 100%;
+    max-width: 100%;
+    color: #ffffff;
+    padding: 0 0 40px;
+    overflow: hidden;
+}
+
+.boxman-map.map-visible {
+    display: block;
+}
+
+
+/* =========================================================
+   TOP COMPOSITION
+========================================================= */
+
+.top-zone {
+    width: min(1180px, 100%);
+    margin: 0 auto 28px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(120px, 0.7fr)
+        minmax(110px, 0.9fr)
+        minmax(300px, 2.2fr)
+        minmax(110px, 0.9fr)
+        minmax(120px, 0.7fr);
+
+    grid-template-rows:
+        auto
+        auto
+        auto;
+
+    column-gap: 16px;
+    row-gap: 18px;
+    align-items: center;
+}
+
+
+/* =========================================================
+   CENTRAL PHOTO
+========================================================= */
+
+.map-main-photo {
+    grid-column: 3;
+    grid-row: 1 / 4;
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    align-self: center;
+    z-index: 2;
+}
+
+.map-main-photo img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    max-height: 500px;
+    height: auto;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   SIDE PHOTOS
+========================================================= */
+
+.photo-01 {
+    grid-column: 2;
+    grid-row: 1;
+    transform: rotate(-2deg);
+}
+
+.photo-02 {
+    grid-column: 4;
+    grid-row: 1;
+    transform: rotate(2deg);
+}
+
+.photo-03 {
+    grid-column: 2;
+    grid-row: 3;
+    transform: rotate(2deg);
+}
+
+.photo-04 {
+    grid-column: 4;
+    grid-row: 3;
+    transform: rotate(-2deg);
+}
+
+.photo-01,
+.photo-02,
+.photo-03,
+.photo-04 {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    margin: 0;
+    z-index: 1;
+}
+
+.photo-01 img,
+.photo-02 img,
+.photo-03 img,
+.photo-04 img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   SIDE TEXT
+========================================================= */
+
+.top-text-left,
+.top-text-right {
+    width: 100%;
+    max-width: 150px;
+    color: #ffffff;
+    font-size: 15px;
+    line-height: 1.4;
+    overflow-wrap: break-word;
+}
+
+.top-text-left {
+    grid-column: 1;
+    grid-row: 1 / 4;
+    justify-self: start;
+    align-self: center;
+    text-align: left;
+}
+
+.top-text-right {
+    grid-column: 5;
+    grid-row: 1 / 4;
+    justify-self: end;
+    align-self: center;
+    text-align: right;
+}
+
+
+/* =========================================================
+   WHITE DESCRIPTION BOX
+========================================================= */
+
+.map-main-text {
+    width: min(430px, 100%);
+    margin: 0 auto 42px;
+    padding: 25px;
+    background: #ffffff;
+    color: #000000;
+    border: 1px solid #ffffff;
+    position: relative;
+    z-index: 10;
+}
+
+.map-main-text h3 {
+    margin: 0 0 4px;
+    font-size: 30px;
+    line-height: 1.15;
+    font-weight: normal;
+}
+
+.map-main-text h4 {
+    margin: 0 0 18px;
+    font-size: 19px;
+    line-height: 1.2;
+    font-weight: normal;
+}
+
+.map-main-text p {
+    margin: 0 0 16px;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.map-main-text p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   QUOTES BELOW DESCRIPTION
+========================================================= */
+
+.middle-zone {
+    width: min(1050px, 100%);
+    margin: 0 auto 45px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 60px;
+    align-items: start;
+}
+
+.map-quote {
+    width: 100%;
+    min-width: 0;
+    padding: 8px;
+    background: #000000;
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 1.5;
+    overflow-wrap: break-word;
+    position: relative;
+    z-index: 5;
+}
+
+.quote-01 {
+    text-align: right;
+}
+
+.quote-02 {
+    text-align: left;
+}
+
+
+/* =========================================================
+   VERTICAL SECTION
+========================================================= */
+
+.vertical-zone {
+    position: relative;
+    width: min(950px, 100%);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.vertical-zone::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    background: #ffffff;
+    transform: translateX(-50%);
+    z-index: 0;
+}
+
+
+/* =========================================================
+   PHOTO PAIR
+========================================================= */
+
+.photo-pair {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    width: max-content;
+    max-width: 100%;
+    padding: 10px;
+    margin: 0 0 42px;
+    background: #000000;
+}
+
+.photo-pair figure {
+    width: clamp(150px, 22vw, 240px);
+    max-width: 42vw;
+    margin: 0;
+}
+
+.photo-pair img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   QUOTE 3
+========================================================= */
+
+.quote-03 {
+    width: min(460px, 88%);
+    margin: 0 0 42px;
+    padding: 10px;
+    background: #000000;
+    color: #ffffff;
+    text-align: center;
+    font-size: 16px;
+    line-height: 1.5;
+    position: relative;
+    z-index: 5;
+}
+
+
+/* =========================================================
+   GIF
+========================================================= */
+
+.photo-07 {
+    width: min(330px, 70vw);
+    margin: 0 0 42px;
+    padding: 8px;
+    background: #000000;
+    position: relative;
+    z-index: 5;
+}
+
+.photo-07 img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   LOWER PHOTOS
+========================================================= */
+
+.lower-photos {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    width: max-content;
+    max-width: 100%;
+    padding: 8px;
+    margin: 0 0 42px;
+    background: #000000;
+}
+
+.photo-08,
+.photo-09 {
+    width: clamp(150px, 22vw, 240px);
+    max-width: 42vw;
+    margin: 0;
+}
+
+.photo-08 img,
+.photo-09 img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   LOWER DESCRIPTION
+========================================================= */
+
+.lower-description {
+    position: relative;
+    z-index: 20;
+    width: min(500px, 88vw);
+    margin: 0 0 45px;
+    padding: 25px;
+    background: #ffffff;
+    color: #000000;
+    border: 1px solid #ffffff;
+    font-size: 16px;
+    line-height: 1.55;
+}
+
+.lower-description strong {
+    display: block;
+    margin-bottom: 15px;
+    font-size: 19px;
+}
+
+
+/* =========================================================
+   LOWER QUOTES
+========================================================= */
+
+.lower-quotes {
+    position: relative;
+    z-index: 5;
+    width: min(1050px, 100%);
+    margin: 0 auto 45px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 30px 70px;
+}
+
+.lower-quotes .map-quote {
+    font-size: 16px;
+    line-height: 1.5;
+    background: #000000;
+}
+
+.quote-04 {
+    text-align: right;
+}
+
+.quote-05 {
+    text-align: left;
+}
+
+.quote-06 {
+    text-align: right;
+}
+
+.quote-07 {
+    text-align: left;
+}
+
+
+/* =========================================================
+   VIDEO
+========================================================= */
+
+.map-video {
+    position: relative;
+    z-index: 30;
+    width: min(760px, 100%);
+    margin: 0 auto 40px;
+    padding: 12px;
+    background: #ffffff;
+    color: #000000;
+}
+
+.map-video-label {
+    margin-bottom: 8px;
+    font-size: 12px;
+}
+
+.map-video-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: #000000;
+}
+
+.map-video-container iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+
+/* =========================================================
+   BACK NAVIGATION
+========================================================= */
+
+.boxman-back {
+    width: 100%;
+    padding: 0 0 20px;
+    text-align: center;
+    position: relative;
+    z-index: 50;
+}
+
+.boxman-back a {
+    color: #ffffff;
+    font-size: 16px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.boxman-back a:hover {
+    color: #57f736;
+}
+
+
+/* =========================================================
+   LIGHTBOX
+========================================================= */
+
+.box-lightbox {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.96);
+    z-index: 9999;
+}
+
+.box-lightbox.active {
+    display: flex;
+}
+
+.box-lightbox-content {
+    width: 90vw;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.box-lightbox-content img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+.box-lightbox-close,
+.box-lightbox-arrow {
+    position: absolute;
+    border: 0;
+    background: transparent;
+    color: #ffffff;
+    cursor: pointer;
+    z-index: 10000;
+}
+
+.box-lightbox-close {
+    top: 15px;
+    right: 25px;
+    font-size: 40px;
+}
+
+.box-lightbox-arrow {
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 55px;
+}
+
+.box-lightbox-prev {
+    left: 20px;
+}
+
+.box-lightbox-next {
+    right: 20px;
+}
+
+body.lightbox-open {
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .boxman-page .container {
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .top-zone {
+        grid-template-columns:
+            minmax(90px, 0.65fr)
+            minmax(95px, 0.8fr)
+            minmax(260px, 2fr)
+            minmax(95px, 0.8fr)
+            minmax(90px, 0.65fr);
+
+        column-gap: 10px;
+    }
+
+    .top-text-left,
+    .top-text-right {
+        max-width: 105px;
+        font-size: 13px;
+    }
+
+    .middle-zone,
+    .lower-quotes {
+        gap: 35px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .boxman-page .header {
+        padding: 13px 15px;
+        margin-bottom: 18px;
+    }
+
+    .header-nav {
+        gap: 15px;
+    }
+
+    .boxman-page .container {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .boxman-page .page-title {
+        font-size: 26px;
+    }
+
+    .boxman-subtitle {
+        font-size: 17px;
+    }
+
+
+    /* ---------------- BOX ---------------- */
+
+    .box-opening {
+        min-height: 48vh;
+
+        /*
+           Keep the same 60px downward shift on mobile.
+        */
+        padding: 25px 0 35px;
+        transform: translateY(60px);
+    }
+
+    .box-opening.opening-hidden {
+        transform: translateY(60px) scale(0.96);
+    }
+
+    .small-box {
+        width: min(520px, 96vw);
+        height: calc(min(520px, 96vw) * 0.673);
+    }
+
+    .box-drawing {
+        width: 100%;
+        height: 100%;
+    }
+
+    .small-box-front-content {
+        left: 0;
+        top: 17.14%;
+        width: 84.62%;
+        height: 80%;
+        padding: 5.2% 8.65%;
+        font-size: clamp(9px, 3vw, 16px);
+    }
+
+    .industrial-arrows {
+        font-size: clamp(14px, 4vw, 23px);
+        letter-spacing: clamp(5px, 2.3vw, 12px);
+    }
+
+    .industrial-number {
+        margin-top: 5.5%;
+        font-size: clamp(11px, 3.5vw, 18px);
+    }
+
+    .box-eyes {
+        left: 50%;
+        top: 26%;
+        width: 34%;
+        height: 13%;
+        gap: 5.5%;
+    }
+
+    .eye {
+        width: 32%;
+        height: 52%;
+        flex-basis: 32%;
+    }
+
+    .pupil {
+        width: 43%;
+        height: 80%;
+    }
+
+    .box-marks {
+        left: 8.65%;
+        bottom: 6.4%;
+        gap: 4vw;
+        font-size: clamp(15px, 5vw, 25px);
+    }
+
+    .box-mark-arrows {
+        font-size: clamp(15px, 5vw, 25px);
+    }
+
+    .box-mark-diamond,
+    .box-mark-umbrella {
+        font-size: clamp(14px, 4.5vw, 23px);
+    }
+
+    .open-button {
+        right: 6.5%;
+        bottom: 10.7%;
+        min-width: 0;
+        padding: 2.2% 3.5%;
+        font-size: clamp(10px, 3.5vw, 16px);
+    }
+
+
+    /* ---------------- TOP ---------------- */
+
+    .top-zone {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 18px;
+        margin-bottom: 24px;
+    }
+
+    .map-main-photo {
+        order: 1;
+        width: min(94vw, 600px);
+    }
+
+    .photo-01,
+    .photo-02,
+    .photo-03,
+    .photo-04 {
+        order: 2;
+        width: min(52vw, 250px);
+        transform: none;
+    }
+
+    .top-text-left,
+    .top-text-right {
+        order: 3;
+        width: 82vw;
+        max-width: 500px;
+        text-align: center;
+        font-size: 14px;
+    }
+
+
+    /* ---------------- WHITE BOX ---------------- */
+
+    .map-main-text {
+        width: 88vw;
+        max-width: 500px;
+        padding: 21px;
+        margin-bottom: 30px;
+    }
+
+    .map-main-text h3 {
+        font-size: 27px;
+    }
+
+    .map-main-text h4 {
+        font-size: 17px;
+    }
+
+    .map-main-text p {
+        font-size: 15px;
+    }
+
+
+    /* ---------------- QUOTES ---------------- */
+
+    .middle-zone {
+        display: flex;
+        flex-direction: column;
+        width: 88vw;
+        gap: 18px;
+        margin-bottom: 30px;
+    }
+
+    .quote-01,
+    .quote-02 {
+        width: 100%;
+        text-align: center;
+    }
+
+
+    /* ---------------- VERTICAL ---------------- */
+
+    .vertical-zone::before {
+        display: none;
+    }
+
+    .photo-pair {
+        width: 94vw;
+        gap: 10px;
+        padding: 6px;
+    }
+
+    .photo-pair figure {
+        width: calc(50vw - 24px);
+        max-width: 42vw;
+    }
+
+    .quote-03 {
+        width: 88vw;
+        margin-bottom: 30px;
+    }
+
+    .photo-07 {
+        width: 72vw;
+        margin-bottom: 30px;
+    }
+
+    .lower-photos {
+        width: 94vw;
+        gap: 10px;
+        padding: 6px;
+    }
+
+    .photo-08,
+    .photo-09 {
+        width: calc(50vw - 24px);
+        max-width: 42vw;
+    }
+
+
+    /* ---------------- LOWER ---------------- */
+
+    .lower-description {
+        width: 88vw;
+        padding: 21px;
+        margin-bottom: 30px;
+    }
+
+    .lower-quotes {
+        display: flex;
+        flex-direction: column;
+        width: 88vw;
+        gap: 18px;
+        margin-bottom: 30px;
+    }
+
+    .lower-quotes .map-quote {
+        width: 100%;
+        text-align: center;
+    }
+
+    .map-video {
+        width: 94vw;
+        padding: 9px;
+        margin-bottom: 30px;
+    }
+
+    .box-lightbox-arrow {
+        display: none;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL SCREENS
+========================================================= */
+
+@media (max-width: 420px) {
+
+    .box-opening {
+        min-height: 42vh;
+    }
+
+    .boxman-page .page-title {
+        font-size: 23px;
+    }
+
+    .map-main-text h3 {
+        font-size: 25px;
+    }
+
+    .map-main-text p,
+    .map-quote,
+    .lower-description {
+        font-size: 14px;
+    }
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid #cccccc;
+    text-align: center;
+    color: #cccccc;
+    font-size: 12px;
+
+/* Цвет текста в футере только на этой странице */
+.boxman-page .footer {
+    color: #cccccc;   /* замените на нужный цвет */
+}
+
+
+</style>
+</head>
+
+
+<body class="boxman-page">
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header class="header">
+
+    <nav class="header-nav">
+
+        <a href="index.html">home</a>
+
+        <a href="works.html">works</a>
+
+        <a href="gallery.html">gallery</a>
+
+        <a href="contact.html">contact me</a>
+
+    </nav>
+
+</header>
+
+
+<div class="container">
+
+
+    <h1 class="page-title">
+        箱男 / The Box Man, 2026
+    </h1>
+
+
+    <h2 class="boxman-subtitle">
+        Mixed analogue and digital, 5 min
+    </h2>
+
+
+    <!-- =====================================================
+         OPENING BOX
+    ====================================================== -->
+
+    <section
+        class="box-opening"
+        id="boxOpening">
+
+        <div class="small-box">
+
+
+            <!-- BOX -->
+
+            <svg
+                class="box-drawing"
+                viewBox="0 0 520 350"
+                preserveAspectRatio="none"
+                aria-hidden="true">
+
+
+                <!-- TOP / CLOSED LID -->
+
+                <polygon
+                    class="box-top"
+                    points="80,0 520,0 440,60 0,60">
+                </polygon>
+
+
+                <!-- RIGHT SIDE -->
+
+                <polygon
+                    class="box-side"
+                    points="440,60 520,0 520,280 440,340">
+                </polygon>
+
+
+                <!-- FRONT -->
+
+                <rect
+                    class="box-front"
+                    x="0"
+                    y="60"
+                    width="440"
+                    height="280">
+                </rect>
+
+
+                <!-- CENTRAL LID SEAM -->
+
+                <line
+                    class="lid-seam"
+                    x1="220"
+                    y1="60"
+                    x2="300"
+                    y2="0">
+                </line>
+
+            </svg>
+
+
+            <!-- =================================================
+                 FRONT CONTENT
+            ================================================== -->
+
+            <div class="small-box-front-content">
+
+
+                <div class="industrial-arrows">
+                    ↑ ↑ ↑ ↑
+                </div>
+
+
+                <div class="industrial-number">
+                    BOX NO. 03724
+                </div>
+
+
+                <!-- EYES -->
+
+                <div
+                    class="box-eyes"
+                    aria-hidden="true">
+
+                    <span class="eye">
+                        <span class="pupil"></span>
+                    </span>
+
+                    <span class="eye">
+                        <span class="pupil"></span>
+                    </span>
+
+                </div>
+
+
+                <!-- PACKAGING MARKS -->
+
+                <div
+                    class="box-marks"
+                    aria-hidden="true">
+
+                    <span class="box-mark-arrows">
+                        ↑↑
+                    </span>
+
+                    <span class="box-mark-diamond">
+                        ♢
+                    </span>
+
+                    <span class="box-mark-umbrella">
+                        ☂
+                    </span>
+
+                </div>
+
+
+                <!-- OPEN -->
+
+                <button
+                    id="openBox"
+                    class="open-button"
+                    type="button">
+
+                    OPEN ME
+
+                </button>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main
+        class="boxman-map"
+        id="boxmanMap">
+
+
+        <!-- =================================================
+             TOP IMAGE COMPOSITION
+        ================================================== -->
+
+        <section class="top-zone">
+
+
+            <div class="top-text-left">
+
+                <em>The pores of my whole body opened their mouths at the same time, and tongues dangled limply from them</em>.
+
+            </div>
+
+
+            <figure class="map-photo photo-01 gallery-image">
+
+                <img
+                    src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/box2.jpeg"
+                    alt=""
+                    data-gallery-index="1">
+
+            </figure>
+
+
+            <figure class="map-main-photo gallery-image">
+
+                <img
+                    src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/box%20main.jpeg"
+                    alt="The Box Man"
+                    data-gallery-index="0">
+
+            </figure>
+
+
+            <figure class="map-photo photo-02 gallery-image">
+
+                <img
+                    src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/box3.jpg"
+                    alt=""
+                    data-gallery-index="2">
+
+            </figure>
+
+
+            <div class="top-text-right">
+
+               <em>To the box man, the act of looking is everything. Seeing without being seen is the ultimate power, but it is also the ultimate isolation</em>.
+
+            </div>
+
+
+            <figure class="map-photo photo-03 gallery-image">
+
+                <img
+                    src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/box4.jpg"
+                    alt=""
+                    data-gallery-index="3">
+
+            </figure>
+
+
+            <figure class="map-photo photo-04 gallery-image">
+
+                <img
+                    src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/box5.jpeg"
+                    alt=""
+                    data-gallery-index="4">
+
+            </figure>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             WHITE DESCRIPTION BOX
+        ================================================== -->
+
+        <section class="map-main-text">
+
+
+            <h3>
+                箱男
+            </h3>
+
+
+            <h4>
+                The Box Man
+            </h4>
+
+
+            <p>
+                A man disappears into a cardboard box.
+            </p>
+
+
+            <p>
+A view of the world through a narrow slit. Doppelgangers. Mirrors. And a little bit of obsession.
+</p>
+<p>
+                A free adaptation of Kobo Abe's novel <cite>The Box Man</cite>.
+</p>
+          
+
+        </section>
+
+
+
+        <!-- =================================================
+             QUOTES
+        ================================================== -->
+
+        <section class="middle-zone">
+
+
+            <div class="map-quote quote-01">
+
+                <em>The color of rain from which a beggar catches cold… the color of time when underground shops close… the color of the unredeemed watch given in commemoration of graduation from college… the color of jealousy broken on the stainless steel sink of the kitchen… the color of the first morning after losing one's job…</em>
+
+            </div>
+
+
+            <div class="map-quote quote-02">
+
+                <em>…the color of the ink on an identity card that has become useless… the color of the last movie ticket the candidate for suicide purchases… and other colors - the color of anonymity, of hibernation, of death as a means of relieving pain, of a hole eaten away by the strongest alkali - time.</em>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             VERTICAL SECTION
+        ================================================== -->
+
+        <section class="vertical-zone">
+
+
+            <div class="photo-pair">
+
+
+                <figure class="map-photo photo-05 gallery-image">
+
+                    <img
+                        src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/box6.jpg"
+                        alt=""
+                        data-gallery-index="5">
+
+                </figure>
+
+
+                <figure class="map-photo photo-06 gallery-image">
+
+                    <img
+                        src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/box7.jpeg"
+                        alt=""
+                        data-gallery-index="6">
+
+                </figure>
+
+
+            </div>
+
+
+
+            <div class="map-quote quote-03">
+
+                <em>- Look, my legs are trembling as if I'd got on top of an electric washer.<br>- Well, come over here. My lap's better than any washer.</em>
+
+            </div>
+
+
+
+            <figure class="map-photo photo-07 gallery-image">
+
+                <img
+                    src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/box.gif"
+                    alt=""
+                    data-gallery-index="7">
+
+            </figure>
+
+
+
+            <div class="lower-photos">
+
+
+                <figure class="map-photo photo-08 gallery-image">
+
+                    <img
+                        src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/box8.jpg"
+                        alt=""
+                        data-gallery-index="8">
+
+                </figure>
+
+
+                <figure class="map-photo photo-09 gallery-image">
+
+                    <img
+                        src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/box9.jpg"
+                        alt=""
+                        data-gallery-index="9">
+
+                </figure>
+
+
+            </div>
+
+
+
+            <section class="lower-description">
+
+
+                <strong>
+                    DESCRIPTION
+                </strong>
+
+
+               The method for this work consisted of translating the physics of the gaze - the very optics of the Box Man himself - into the language of cinema, rather than translating the plot as such. As if the Box Man could print out everything he saw from inside his box, and from those printouts, a film would be edited together. Visually, I looked to the aesthetics of the avant-garde Japanese photography movement <em>Provoke</em> - Abe's contemporaries - with their motto of <em>are, bure, boke</em> (rough, blurred, out-of-focus). Cinematic form thus arose organically from content.
+
+    <p>
+               <cite>The Box Man</cite> feels to me like the most cinematic Abe's work. The Box Man himself is a camera.
+  </p>
+
+<!-- АВТОР, АКТЁРЫ, ПОКАЗЫ – теперь с меньшим шрифтом и меньшими отступами -->
+    <div style="margin-top: 35px; font-size: 16px; line-height: 1.5;">
+        <p style="margin: 0 0 6px 0;">
+            <b>Author</b>: Kobo Abe, Olga Losik
+        </p>
+        <p style="margin: 0 0 6px 0;">
+            <b>Cast:</b> Alyona Glazunova, Kirill Verkhozin, Ivan Fadeyev
+        </p>
+        <p style="margin: 0 0 6px 0;">
+            <b>Screenings:</b>
+        </p>
+        <ul style="list-style: none; padding-left: 0; margin: 0;">
+            <li style="margin: 0 0 4px 0; padding-left: 20px;">Aug 2026 -- Vertikaly Cinema Club of independent filmmakers, Moscow, Russia</li>
+        </ul>
+    </div>
+
+</section>
+
+
+        <!-- =================================================
+             LOWER QUOTES
+        ================================================== -->
+
+        <section class="lower-quotes">
+
+
+            <div class="map-quote quote-04">
+
+               <em>The box is simple, but its effect is absolute. Once you enter it, the outside world changes its meaning entirely. What was once familiar becomes distant, and what was hidden becomes obvious.</em>
+            </div>
+
+
+            <div class="map-quote quote-05">
+
+                 <em>I want to spy on all sorts of places,
+                and the box is a portable hole that occurred
+                to me under the circumstances, it being impossible
+                to punch holes throughout the world.</em>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             VIDEO
+        ================================================== -->
+
+        <section class="map-video">
+
+
+            <div class="map-video-label">
+                TEASER
+            </div>
+
+
+            <div class="map-video-container">
+
+                <iframe
+                    src="https://www.youtube.com/embed/_9qdfEgbFe4?rel=0"
+                    title="The Box Man"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen>
+                </iframe>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             BACK NAVIGATION
+        ================================================== -->
+
+        <div class="boxman-back">
+
+
+            <!-- BACK TO BOX -->
+
+            <a
+                href="#"
+                id="backToBox">
+
+                ← Back to 📦
+
+            </a>
+
+
+            &nbsp;&nbsp;&nbsp;
+
+
+            <!-- BACK TO WORKS -->
+
+            <a href="works.html">
+
+                ← Back to Works
+
+            </a>
+
+
+        </div>
+
+
+    </main>
+
+    </main>
+
+    <!-- =====================================================
+         FOOTER (добавлен только для этой страницы)
+    ====================================================== -->
+    <footer class="footer">
+        <p>&copy; 2026 Designed & built by Olga Losik. All rights reserved.</p>
+    </footer>
+
+</div> <!-- закрывается .container -->
+
+</div>
+
+
+
+<!-- =========================================================
+     LIGHTBOX
+========================================================= -->
+
+<div
+    class="box-lightbox"
+    id="boxLightbox"
+    aria-hidden="true">
+
+
+    <button
+        class="box-lightbox-close"
+        id="lightboxClose"
+        type="button"
+        aria-label="Close">
+
+        ×
+
+    </button>
+
+
+    <button
+        class="box-lightbox-arrow box-lightbox-prev"
+        id="lightboxPrev"
+        type="button"
+        aria-label="Previous image">
+
+        ‹
+
+    </button>
+
+
+    <div class="box-lightbox-content">
+
+        <img
+            id="lightboxImage"
+            src=""
+            alt="">
+
+    </div>
+
+
+    <button
+        class="box-lightbox-arrow box-lightbox-next"
+        id="lightboxNext"
+        type="button"
+        aria-label="Next image">
+
+        ›
+
+    </button>
+
+
+</div>
+
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+    /* =====================================================
+       OPEN BOX / BACK TO BOX
+    ===================================================== */
+
+    const openButton =
+        document.getElementById("openBox");
+
+    const opening =
+        document.getElementById("boxOpening");
+
+    const map =
+        document.getElementById("boxmanMap");
+
+    const backToBox =
+        document.getElementById("backToBox");
+
+
+    /* OPEN BOX */
+
+    openButton.addEventListener("click", function () {
+
+
+        opening.classList.add("opening-hidden");
+
+
+        setTimeout(function () {
+
+
+            opening.style.display = "none";
+
+
+            map.classList.add("map-visible");
+
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+
+        }, 650);
+
+    });
+
+
+
+    /* =====================================================
+       BACK TO BOX
+    ===================================================== */
+
+    backToBox.addEventListener("click", function (event) {
+
+        event.preventDefault();
+
+
+        /*
+           Hide the main content.
+        */
+
+        map.classList.remove("map-visible");
+
+
+        /*
+           Bring the box back.
+        */
+
+        opening.style.display = "flex";
+
+
+        /*
+           Small delay allows the browser to
+           register display:flex before animation.
+        */
+
+        requestAnimationFrame(function () {
+
+            opening.classList.remove("opening-hidden");
+
+        });
+
+
+        /*
+           Scroll to the box area.
+        */
+
+        setTimeout(function () {
+
+            opening.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+        }, 50);
+
+    });
+
+
+
+    /* =====================================================
+       GALLERY / LIGHTBOX
+    ===================================================== */
+
+    const galleryImages = Array.from(
+        document.querySelectorAll(".gallery-image img")
+    );
+
+
+    const lightbox =
+        document.getElementById("boxLightbox");
+
+    const lightboxImage =
+        document.getElementById("lightboxImage");
+
+    const closeButton =
+        document.getElementById("lightboxClose");
+
+    const previousButton =
+        document.getElementById("lightboxPrev");
+
+    const nextButton =
+        document.getElementById("lightboxNext");
+
+
+    let currentIndex = 0;
+
+
+
+    function showImage(index) {
+
+
+        if (index < 0) {
+            index = galleryImages.length - 1;
+        }
+
+
+        if (index >= galleryImages.length) {
+            index = 0;
+        }
+
+
+        currentIndex = index;
+
+
+        const image =
+            galleryImages[currentIndex];
+
+
+        lightboxImage.src =
+            image.src;
+
+
+        lightboxImage.alt =
+            image.alt || "The Box Man";
+
+    }
+
+
+
+    function openLightbox(index) {
+
+
+        showImage(index);
+
+
+        lightbox.classList.add("active");
+
+
+        lightbox.setAttribute(
+            "aria-hidden",
+            "false"
+        );
+
+
+        document.body.classList.add(
+            "lightbox-open"
+        );
+
+    }
+
+
+
+    function closeLightbox() {
+
+
+        lightbox.classList.remove(
+            "active"
+        );
+
+
+        lightbox.setAttribute(
+            "aria-hidden",
+            "true"
+        );
+
+
+        document.body.classList.remove(
+            "lightbox-open"
+        );
+
+
+        lightboxImage.src = "";
+
+    }
+
+
+
+    galleryImages.forEach(
+        function (image, index) {
+
+
+            image.addEventListener(
+                "click",
+                function () {
+
+                    openLightbox(index);
+
+                }
+            );
+
+
+        }
+    );
+
+
+
+    /* PREVIOUS */
+
+    previousButton.addEventListener(
+        "click",
+        function (event) {
+
+
+            event.stopPropagation();
+
+
+            showImage(
+                currentIndex - 1
+            );
+
+
+        }
+    );
+
+
+
+    /* NEXT */
+
+    nextButton.addEventListener(
+        "click",
+        function (event) {
+
+
+            event.stopPropagation();
+
+
+            showImage(
+                currentIndex + 1
+            );
+
+
+        }
+    );
+
+
+
+    /* CLOSE */
+
+    closeButton.addEventListener(
+        "click",
+        function () {
+
+            closeLightbox();
+
+        }
+    );
+
+
+
+    /* CLICK OUTSIDE IMAGE */
+
+    lightbox.addEventListener(
+        "click",
+        function (event) {
+
+
+            if (
+                event.target === lightbox
+            ) {
+
+                closeLightbox();
+
+            }
+
+
+        }
+    );
+
+
+
+    /* =====================================================
+       KEYBOARD
+    ===================================================== */
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+
+            if (
+                !lightbox.classList.contains(
+                    "active"
+                )
+            ) {
+
+                return;
+
+            }
+
+
+            if (event.key === "Escape") {
+
+                closeLightbox();
+
+            }
+
+
+            if (event.key === "ArrowLeft") {
+
+                showImage(
+                    currentIndex - 1
+                );
+
+            }
+
+
+            if (event.key === "ArrowRight") {
+
+                showImage(
+                    currentIndex + 1
+                );
+
+            }
+
+
+        }
+    );
+
+
+
+    /* =====================================================
+       TOUCH / SWIPE
+    ===================================================== */
+
+    let touchStartX = 0;
+
+    let touchEndX = 0;
+
+
+
+    lightbox.addEventListener(
+        "touchstart",
+        function (event) {
+
+
+            touchStartX =
+                event.changedTouches[0].screenX;
+
+
+        },
+        { passive: true }
+    );
+
+
+
+    lightbox.addEventListener(
+        "touchend",
+        function (event) {
+
+
+            touchEndX =
+                event.changedTouches[0].screenX;
+
+
+            const distance =
+                touchEndX - touchStartX;
+
+
+            if (
+                Math.abs(distance) < 50
+            ) {
+
+                return;
+
+            }
+
+
+            if (distance > 0) {
+
+                showImage(
+                    currentIndex - 1
+                );
+
+            } else {
+
+                showImage(
+                    currentIndex + 1
+                );
+
+            }
+
+
+        },
+        { passive: true }
+    );
+
+
+});
+
+</script>
+
+</body>
+</html>

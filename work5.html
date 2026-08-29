@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog</title>
+    <link rel="stylesheet" href="styles.css">
+<style>
+    /* Фон всей страницы — черепица */
+    body {
+        background-image: url('https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/dog%20back.jpg');
+        background-repeat: repeat;        /* повторяем по горизонтали и вертикали */
+        background-size: 250px auto;      /* ширина плитки = 250px, высота пропорциональна */
+        background-position: left top;
+    }
+
+    /* Если у контейнера есть белый фон — делаем его прозрачным или полупрозрачным,
+       чтобы фоновое изображение просвечивало */
+    .container {
+        background-color: rgba(255, 255, 455, 0.79); /* полупрозрачный белый */
+        /* или background-color: transparent; если хотите полную прозрачность */
+    }
+
+/* Изменяем цвет текста в футере только на этой странице */
+.footer {
+    color: #FFFFFF;   /* замените на нужный цвет */
+}
+
+</style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="header-nav">
+            <a href="index.html">home</a>
+            <a href="works.html">works</a>
+            <a href="gallery.html">gallery</a>
+            <a href="contact.html">contact me</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1 class="page-title">Dog, 2026</h1>
+        <h2 style="font-size: 20px; margin-bottom: 20px;">Analogue, Animation, Short study, 1 min</h2>
+        
+
+  <!-- КРАТКОЕ ОПИСАНИЕ -->
+            <p>
+Analogue filmic study combining Super 8 mm with hand-drawn colouring on celluloid.
+            </p>
+
+            <!-- ФОТОГАЛЕРЕЯ -->
+            <div class="work-gallery">
+                <img src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/dog1.jpg" alt="" class="gallery-photo">
+                <img src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/dog2.jpg" alt="" class="gallery-photo">
+                <img src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/dog3.jpg" alt="" class="gallery-photo">
+                <img src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/dog4.jpg" alt="" class="gallery-photo">
+                <img src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/dog5.jpg" alt="" class="gallery-photo">
+                <img src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/dog6.jpg" alt="" class="gallery-photo">
+                <img src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/dog7.jpg" alt="" class="gallery-photo">
+                <img src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/dog8.jpg" alt="" class="gallery-photo">
+                <img src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/dog9.jpg" alt="" class="gallery-photo">
+                <img src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/dog10.jpg" alt="" class="gallery-photo">
+                <img src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/dog11.jpg" alt="" class="gallery-photo">
+                <img src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/dog12.jpg" alt="" class="gallery-photo">
+                <img src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/dog13.jpg" alt="" class="gallery-photo">
+                <img src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/dog14.jpg" alt="" class="gallery-photo">
+                <img src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/dog15.jpg" alt="" class="gallery-photo">
+            </div>
+
+   
+            <!-- АВТОР -->
+            <p style="margin-top: 15px;">
+                <strong>Author:</strong><br>
+                Olga Losik
+            </p>
+
+
+            <!-- ВИДЕО с отступом сверху -->
+
+                <div class="work-video" id="videoPreview">
+                    <div class="video-thumbnail">
+                        <img
+                            src="https://img.youtube.com/vi/RDs-C4N0mCc/maxresdefault.jpg"
+                            alt=""
+                        >
+                        <div class="video-play-button">▶</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ССЫЛКА НАЗАД -->
+            <p style="margin-top: 15px;">
+                <a href="works.html" style="color: #0000ff; text-decoration: underline;">← Back to Works</a>
+            </p>
+
+        </div> <!-- конец .work-detail -->
+
+        <div class="footer">
+            <p>&copy; 2026 Designed & built by Olga Losik. All rights reserved.</p>
+        </div>
+    </div> <!-- конец .container -->
+
+    <!-- ФОТО-ЛАЙТБОКС -->
+    <div id="lightbox" class="lightbox">
+        <button id="lightboxPrev" class="lightbox-arrow lightbox-prev">‹</button>
+        <img id="lightboxImage" src="" alt="">
+        <button id="lightboxNext" class="lightbox-arrow lightbox-next">›</button>
+    </div>
+
+    <!-- ВИДЕО-ЛАЙТБОКС -->
+    <div id="videoLightbox" class="video-lightbox">
+        <div class="video-container">
+            <iframe
+                id="lightboxVideo"
+                src=""
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+
+    <script>
+        /* ========================================
+           GALLERY
+           ======================================== */
+        const galleryPhotos =
+            Array.from(document.querySelectorAll('.gallery-photo'));
+
+        const lightbox =
+            document.getElementById('lightbox');
+
+        const lightboxImage =
+            document.getElementById('lightboxImage');
+
+        const prevButton =
+            document.getElementById('lightboxPrev');
+
+        const nextButton =
+            document.getElementById('lightboxNext');
+
+        let currentPhoto = 0;
+
+        /* ========================================
+           OPEN PHOTO
+           ======================================== */
+        function openPhoto(index) {
+            currentPhoto = index;
+            lightboxImage.style.transition = 'none';
+            lightboxImage.style.transform = 'translateX(0)';
+            lightboxImage.src = galleryPhotos[currentPhoto].src;
+            lightbox.classList.add('active');
+        }
+
+        /* ========================================
+           CHANGE PHOTO
+           ======================================== */
+        function changePhoto(direction) {
+            const newImage = galleryPhotos[currentPhoto].src;
+
+            if (direction === 'next') {
+                lightboxImage.style.transform = 'translateX(-100vw)';
+            } else {
+                lightboxImage.style.transform = 'translateX(100vw)';
+            }
+
+            setTimeout(() => {
+                lightboxImage.style.transition = 'none';
+                lightboxImage.src = newImage;
+
+                if (direction === 'next') {
+                    lightboxImage.style.transform = 'translateX(100vw)';
+                } else {
+                    lightboxImage.style.transform = 'translateX(-100vw)';
+                }
+
+                lightboxImage.offsetHeight;
+                lightboxImage.style.transition = 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)';
+                lightboxImage.style.transform = 'translateX(0)';
+            }, 300);
+        }
+
+        /* ========================================
+           PREVIOUS PHOTO
+           ======================================== */
+        function showPrevious() {
+            currentPhoto--;
+            if (currentPhoto < 0) {
+                currentPhoto = galleryPhotos.length - 1;
+            }
+            changePhoto('previous');
+        }
+
+        /* ========================================
+           NEXT PHOTO
+           ======================================== */
+        function showNext() {
+            currentPhoto++;
+            if (currentPhoto >= galleryPhotos.length) {
+                currentPhoto = 0;
+            }
+            changePhoto('next');
+        }
+
+        /* ========================================
+           CLICK ON PHOTO
+           ======================================== */
+        galleryPhotos.forEach((photo, index) => {
+            photo.addEventListener('click', () => {
+                openPhoto(index);
+            });
+        });
+
+        /* ========================================
+           PHOTO ARROWS
+           ======================================== */
+        prevButton.addEventListener('click', (event) => {
+            event.stopPropagation();
+            showPrevious();
+        });
+
+        nextButton.addEventListener('click', (event) => {
+            event.stopPropagation();
+            showNext();
+        });
+
+        /* ========================================
+           CLOSE PHOTO LIGHTBOX
+           ======================================== */
+        lightbox.addEventListener('click', (event) => {
+            if (event.target === lightbox) {
+                lightbox.classList.remove('active');
+                lightboxImage.src = '';
+            }
+        });
+
+        /* ========================================
+           VIDEO
+           ======================================== */
+        const videoPreview =
+            document.getElementById('videoPreview');
+
+        const videoLightbox =
+            document.getElementById('videoLightbox');
+
+        const lightboxVideo =
+            document.getElementById('lightboxVideo');
+
+        const youtubeVideoID = 'RDs-C4N0mCc';
+
+        /* ========================================
+           OPEN VIDEO
+           ======================================== */
+        videoPreview.addEventListener('click', () => {
+            lightboxVideo.src =
+                'https://www.youtube.com/embed/RDs-C4N0mCc?autoplay=1';
+            videoLightbox.classList.add('active');
+        });
+
+        /* ========================================
+           CLOSE VIDEO
+           ======================================== */
+        videoLightbox.addEventListener('click', (event) => {
+            if (event.target === videoLightbox) {
+                lightboxVideo.src = '';
+                videoLightbox.classList.remove('active');
+            }
+        });
+
+        /* ========================================
+           KEYBOARD
+           ======================================== */
+        document.addEventListener('keydown', (event) => {
+            /* ESC */
+            if (event.key === 'Escape') {
+                if (lightbox.classList.contains('active')) {
+                    lightbox.classList.remove('active');
+                    lightboxImage.src = '';
+                }
+                if (videoLightbox.classList.contains('active')) {
+                    lightboxVideo.src = '';
+                    videoLightbox.classList.remove('active');
+                }
+            }
+
+            /* Стрелка влево */
+            if (event.key === 'ArrowLeft' && lightbox.classList.contains('active')) {
+                showPrevious();
+            }
+
+            /* Стрелка вправо */
+            if (event.key === 'ArrowRight' && lightbox.classList.contains('active')) {
+                showNext();
+            }
+        });
+
+        /* ========================================
+           TOUCH SWIPE
+           ======================================== */
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        lightbox.addEventListener('touchstart', (event) => {
+            touchStartX = event.touches[0].clientX;
+        }, { passive: true });
+
+        lightbox.addEventListener('touchend', (event) => {
+            touchEndX = event.changedTouches[0].clientX;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const swipeDistance = touchEndX - touchStartX;
+
+            if (swipeDistance > 50) {
+                showPrevious();
+            }
+
+            if (swipeDistance < -50) {
+                showNext();
+            }
+        }
+    </script>
+</body>
+</html>

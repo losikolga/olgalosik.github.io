@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paris, Earth</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="header">
+        <div class="header-nav">
+            <a href="index.html">home</a>
+            <a href="works.html">works</a>
+            <a href="gallery.html">gallery</a>
+            <a href="contact.html">contact me</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1 class="page-title">Paris, Earth, 2025</h1>
+        <h2 style="font-size: 20px; margin-bottom: 20px;">Docufiction, Short study, 4 min</h2>
+        
+        <div class="work-detail">
+            <!-- КРАТКОЕ ОПИСАНИЕ -->
+            <p>
+                A space keeper of collective memory arrives on a desolate Earth in search of a ghost city - the once-legendary capital of France. Is the traveler truly setting foot in Paris? Who knows. Does the location matter? Perhaps not. When the desire to remember is strong enough, it manifests its own reality.
+            </p>
+
+            <!-- ФОТОГАЛЕРЕЯ -->
+            <div class="work-gallery">
+                <img src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/paris1.jpg" alt="" class="gallery-photo">
+                <img src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/paris2.jpg" alt="" class="gallery-photo">
+                <img src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/paris4.jpg" alt="" class="gallery-photo">
+                <img src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/paris3.jpg" alt="" class="gallery-photo">
+            </div>
+
+            <!-- ПОЛНОЕ ОПИСАНИЕ -->
+            <p style="margin-top: 15px;">
+                <strong>Description:</strong><br>
+                A short, defamiliarizing piece on humanity's phantom pain.
+                This study was shot in a single day on a mobile phone.
+            </p>
+            <p style="margin-top: 15px;">
+                My hometown has its own Eiffel Tower. It was erected in 2007 at the entrance to a newly opened "Parisian café." The café lasted about ten years before closing down, but the tower remained standing on the street, wobbling and rusting away. In 2025, the city authorities wanted to dismantle it, but the locals voted to keep it - by then, it had already become a local landmark. So the tower was renovated and, a few years ago, relocated to a park as an art installation.
+            </p>
+            <p style="margin-top: 15px;">
+                One winter evening, walking home through that park, I found myself surrounded by thick fog. Nothing was visible except the Tower emerging from the clouds. I thought: if I were an intergalactic time traveler unfamiliar with Earth, I would have taken this place for Paris. It also made me think that sometimes the things we hold dear exist in our memory on their own, detached from any specific place, just like this "Eiffel Tower" in the fog, thousands of kilometres away from France.
+            </p>
+
+            <!-- АВТОР -->
+            <p style="margin-top: 15px;">
+                <strong>Author:</strong><br>
+                Olga Losik
+            </p>
+
+ <!-- ФЕСТИВАЛИ (СПИСОК БЕЗ МАРКЕРОВ) -->
+            <p style="margin-top: 15px;">
+                <strong>Festivals and Screenings:</strong>
+            </p>
+            <ul style="list-style: none; padding-left: 20px; margin: 0;">
+                <li style="margin-top: 8px;">Apr 2026 -- Invisible Cinema Film Festival, Saint-Petersburg, Russia
+</li>
+            </ul>
+
+            <!-- ======= НОВЫЙ БЛОК С ФОТО И ПОДПИСЬЮ ======= -->
+            <div style="margin-top: 30px; max-width: 100%;">
+                <img 
+                    src="https://raw.githubusercontent.com/losikolga/olgalosik.github.io/refs/heads/main/images/paris5.png" 
+                    alt="Eiffel Tower in my hometown" 
+                    style="width: 100%; height: auto; display: block; border-radius: 4px;"
+                >
+                <div style="border: 1px solid #ccc; padding: 8px 12px; margin-top: 6px; text-align: center; font-size: 14px; color: #555; border-radius: 4px;">
+                    Eiffel Tower in my hometown. <i>© Olga Losik, 2025</i>
+                </div>
+            </div>
+
+            <!-- ВИДЕО с отступом сверху -->
+            <section class="map-video" style="margin-top: 40px;">
+                <div class="map-video-label">
+                    TEASER
+                </div>
+
+                <div class="work-video" id="videoPreview">
+                    <div class="video-thumbnail">
+                        <img
+                            src="https://img.youtube.com/vi/3M1bqWvk5c0/maxresdefault.jpg"
+                            alt=""
+                        >
+                        <div class="video-play-button">▶</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ССЫЛКА НАЗАД -->
+            <p style="margin-top: 15px;">
+                <a href="works.html" style="color: #0000ff; text-decoration: underline;">← Back to Works</a>
+            </p>
+
+        </div> <!-- конец .work-detail -->
+
+        <div class="footer">
+            <p>&copy; 2026 Designed & built by Olga Losik. All rights reserved.</p>
+        </div>
+    </div> <!-- конец .container -->
+
+    <!-- ФОТО-ЛАЙТБОКС -->
+    <div id="lightbox" class="lightbox">
+        <button id="lightboxPrev" class="lightbox-arrow lightbox-prev">‹</button>
+        <img id="lightboxImage" src="" alt="">
+        <button id="lightboxNext" class="lightbox-arrow lightbox-next">›</button>
+    </div>
+
+    <!-- ВИДЕО-ЛАЙТБОКС -->
+    <div id="videoLightbox" class="video-lightbox">
+        <div class="video-container">
+            <iframe
+                id="lightboxVideo"
+                src=""
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+
+    <script>
+        /* ========================================
+           GALLERY
+           ======================================== */
+        const galleryPhotos =
+            Array.from(document.querySelectorAll('.gallery-photo'));
+
+        const lightbox =
+            document.getElementById('lightbox');
+
+        const lightboxImage =
+            document.getElementById('lightboxImage');
+
+        const prevButton =
+            document.getElementById('lightboxPrev');
+
+        const nextButton =
+            document.getElementById('lightboxNext');
+
+        let currentPhoto = 0;
+
+        /* ========================================
+           OPEN PHOTO
+           ======================================== */
+        function openPhoto(index) {
+            currentPhoto = index;
+            lightboxImage.style.transition = 'none';
+            lightboxImage.style.transform = 'translateX(0)';
+            lightboxImage.src = galleryPhotos[currentPhoto].src;
+            lightbox.classList.add('active');
+        }
+
+        /* ========================================
+           CHANGE PHOTO
+           ======================================== */
+        function changePhoto(direction) {
+            const newImage = galleryPhotos[currentPhoto].src;
+
+            if (direction === 'next') {
+                lightboxImage.style.transform = 'translateX(-100vw)';
+            } else {
+                lightboxImage.style.transform = 'translateX(100vw)';
+            }
+
+            setTimeout(() => {
+                lightboxImage.style.transition = 'none';
+                lightboxImage.src = newImage;
+
+                if (direction === 'next') {
+                    lightboxImage.style.transform = 'translateX(100vw)';
+                } else {
+                    lightboxImage.style.transform = 'translateX(-100vw)';
+                }
+
+                lightboxImage.offsetHeight;
+                lightboxImage.style.transition = 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)';
+                lightboxImage.style.transform = 'translateX(0)';
+            }, 300);
+        }
+
+        /* ========================================
+           PREVIOUS PHOTO
+           ======================================== */
+        function showPrevious() {
+            currentPhoto--;
+            if (currentPhoto < 0) {
+                currentPhoto = galleryPhotos.length - 1;
+            }
+            changePhoto('previous');
+        }
+
+        /* ========================================
+           NEXT PHOTO
+           ======================================== */
+        function showNext() {
+            currentPhoto++;
+            if (currentPhoto >= galleryPhotos.length) {
+                currentPhoto = 0;
+            }
+            changePhoto('next');
+        }
+
+        /* ========================================
+           CLICK ON PHOTO
+           ======================================== */
+        galleryPhotos.forEach((photo, index) => {
+            photo.addEventListener('click', () => {
+                openPhoto(index);
+            });
+        });
+
+        /* ========================================
+           PHOTO ARROWS
+           ======================================== */
+        prevButton.addEventListener('click', (event) => {
+            event.stopPropagation();
+            showPrevious();
+        });
+
+        nextButton.addEventListener('click', (event) => {
+            event.stopPropagation();
+            showNext();
+        });
+
+        /* ========================================
+           CLOSE PHOTO LIGHTBOX
+           ======================================== */
+        lightbox.addEventListener('click', (event) => {
+            if (event.target === lightbox) {
+                lightbox.classList.remove('active');
+                lightboxImage.src = '';
+            }
+        });
+
+        /* ========================================
+           VIDEO
+           ======================================== */
+        const videoPreview =
+            document.getElementById('videoPreview');
+
+        const videoLightbox =
+            document.getElementById('videoLightbox');
+
+        const lightboxVideo =
+            document.getElementById('lightboxVideo');
+
+        const youtubeVideoID = '3M1bqWvk5c0';
+
+        /* ========================================
+           OPEN VIDEO
+           ======================================== */
+        videoPreview.addEventListener('click', () => {
+            lightboxVideo.src =
+                'https://www.youtube.com/embed/3M1bqWvk5c0?autoplay=1';
+            videoLightbox.classList.add('active');
+        });
+
+        /* ========================================
+           CLOSE VIDEO
+           ======================================== */
+        videoLightbox.addEventListener('click', (event) => {
+            if (event.target === videoLightbox) {
+                lightboxVideo.src = '';
+                videoLightbox.classList.remove('active');
+            }
+        });
+
+        /* ========================================
+           KEYBOARD
+           ======================================== */
+        document.addEventListener('keydown', (event) => {
+            /* ESC */
+            if (event.key === 'Escape') {
+                if (lightbox.classList.contains('active')) {
+                    lightbox.classList.remove('active');
+                    lightboxImage.src = '';
+                }
+                if (videoLightbox.classList.contains('active')) {
+                    lightboxVideo.src = '';
+                    videoLightbox.classList.remove('active');
+                }
+            }
+
+            /* Стрелка влево */
+            if (event.key === 'ArrowLeft' && lightbox.classList.contains('active')) {
+                showPrevious();
+            }
+
+            /* Стрелка вправо */
+            if (event.key === 'ArrowRight' && lightbox.classList.contains('active')) {
+                showNext();
+            }
+        });
+
+        /* ========================================
+           TOUCH SWIPE
+           ======================================== */
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        lightbox.addEventListener('touchstart', (event) => {
+            touchStartX = event.touches[0].clientX;
+        }, { passive: true });
+
+        lightbox.addEventListener('touchend', (event) => {
+            touchEndX = event.changedTouches[0].clientX;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const swipeDistance = touchEndX - touchStartX;
+
+            if (swipeDistance > 50) {
+                showPrevious();
+            }
+
+            if (swipeDistance < -50) {
+                showNext();
+            }
+        }
+    </script>
+</body>
+</html>
